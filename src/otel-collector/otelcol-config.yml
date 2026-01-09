@@ -15,8 +15,9 @@ receivers:
   httpcheck/frontend-proxy:
     targets:
       - endpoint: http://frontend-proxy:${env:ENVOY_PORT}
-  docker_stats:
-    endpoint: unix:///var/run/docker.sock
+  # docker_stats disabled due to Docker API version mismatch on macOS
+  # docker_stats:
+  #   endpoint: unix:///var/run/docker.sock
   redis:
     endpoint: "valkey-cart:6379"
     username: "valkey"
@@ -126,7 +127,7 @@ service:
       processors: [transform, batch]
       exporters: [otlp, debug, spanmetrics]
     metrics:
-      receivers: [hostmetrics, docker_stats, httpcheck/frontend-proxy, otlp, prometheus, redis, spanmetrics]
+      receivers: [hostmetrics, httpcheck/frontend-proxy, otlp, prometheus, redis, spanmetrics]
       processors: [batch]
       exporters: [otlphttp/prometheus, debug]
     logs:

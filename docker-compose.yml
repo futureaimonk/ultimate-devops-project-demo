@@ -488,7 +488,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 20M
+          memory: 100M
     restart: unless-stopped
     ports:
       - "${PRODUCT_CATALOG_PORT}"
@@ -497,7 +497,7 @@ services:
       - PRODUCT_CATALOG_RELOAD_INTERVAL
       - FLAGD_HOST
       - FLAGD_PORT
-      - GOMEMLIMIT=16MiB
+      - GOMEMLIMIT=80MiB
       - OTEL_EXPORTER_OTLP_ENDPOINT
       - OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
       - OTEL_RESOURCE_ATTRIBUTES

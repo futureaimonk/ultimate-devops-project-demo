@@ -6,7 +6,7 @@ COPY gradlew* settings.gradle* build.gradle .
 COPY ./gradle ./gradle
 
 RUN chmod +x ./gradlew
-RUN ./gradlew
+RUN ./gradlew --no-daemon --version
 RUN ./gradlew downloadRepos
 
 COPY . .

@@ -7,14 +7,14 @@ RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache/go-build \
     mkdir -p /root/.cache/go-build
 
-# Copy
-COPY go.mod go.sum ./
+# Copy go.mod and go.sum first for better layer caching
+COPY src/product-catalog/go.mod src/product-catalog/go.sum ./
 
-# Download
+# Download dependencies (cached if go.mod/go.sum unchanged)
 RUN go mod download
 
 # Copy the rest of the source code
-COPY . .
+COPY src/product-catalog/ .
 
 RUN go build -o product-catalog .
 
@@ -24,8 +24,8 @@ FROM alpine AS release
 
 WORKDIR /usr/src/app/
 
-COPY ./products/ ./products/
-COPY --from=builder /usr/src/app/product-catalog/ ./
+COPY src/product-catalog/products/ ./products/
+COPY --from=builder /usr/src/app/product-catalog ./
 
 ENV PRODUCT_CATALOG_PORT=8088
 ENTRYPOINT [ "./product-catalog" ]
