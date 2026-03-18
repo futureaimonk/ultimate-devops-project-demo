@@ -5,10 +5,21 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/healthcheck-path: /
 spec:
   ingressClassName: alb
   rules:
-    - host: example.com
+    - host: futureaimonk.me
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: opentelemetry-demo-frontendproxy
+                port:
+                  number: 8080
+    - host: www.futureaimonk.me
       http:
         paths:
           - path: "/"
