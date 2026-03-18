@@ -31,7 +31,7 @@ spec:
       serviceAccountName: opentelemetry-demo
       containers:
         - name: productcatalogservice
-          image: apdockerlive/product-catalog:23239389118
+          image: apdockerlive/product-catalog:23239510291
           imagePullPolicy: IfNotPresent
           ports:
             
