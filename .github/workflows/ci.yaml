@@ -71,7 +71,7 @@ jobs:
         - name: Docker Push
           uses: docker/build-push-action@v6
           with:
-            context: src/product-catalog
+            context: . # Changed from src/product-catalog
             file: src/product-catalog/Dockerfile
             push: true
             tags: ${{ secrets.DOCKER_USERNAME }}/product-catalog:${{github.run_id}}
