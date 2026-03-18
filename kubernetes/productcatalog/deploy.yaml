@@ -32,7 +32,7 @@ spec:
       containers:
         - name: productcatalogservice
 
-          image: apdockerlive/product-catalog:v1
+          image: apdockerlive/product-catalog:23242803814
 
           imagePullPolicy: IfNotPresent
           ports:
